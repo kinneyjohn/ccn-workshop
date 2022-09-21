@@ -37,25 +37,11 @@ components:
         - value: '-Xmx4G -Xss128M -XX:MetaspaceSize=1G -XX:MaxMetaspaceSize=2G -XX:+CMSClassUnloadingEnabled'
           name: MAVEN_OPTS
 commands:
-  - name: Login to OpenShift
-    actions:
-      - workdir: '${CHE_PROJECTS_ROOT}'
-        type: exec
-        command: 'oc login https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT --insecure-skip-tls-verify=true --username=user1 --password=password'
-        component: quarkus-tools
-  - name: Start Debugger on 5005
-    actions:
-      - referenceContent: |
-          {
-            "version": "0.2.0",
-            "configurations": [
-              {
-                "type": "java",
-                "request": "attach",
-                "name": "Attach to App",
-                "hostName": "localhost",
-                "port": 5005
-              }
-            ]
-          }
-        type: vscode-launch
+  - id: Login to OpenShift
+    exec:
+      component: quarkus-tools
+      group:
+        kind: run
+      label: Run the application
+      workingDir: '${PROJECTS_ROOT}'
+      commandLine: 'oc login https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT --insecure-skip-tls-verify=true --username=user1 --password=password'
