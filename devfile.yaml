@@ -19,7 +19,7 @@ components:
             discoverable: 'true'
             path: /q/dev
           name: quarkus-devui
-          targetPort: 8088
+          targetPort: 8080
       memoryLimit: 4Gi
       env:
         - value: /home/jboss/.m2
