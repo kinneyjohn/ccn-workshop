@@ -22,14 +22,14 @@ components:
             public: 'true'
             discoverable: 'true'
           name: index-webpage
-          port: 8080
+          targetPort: 8080
         - attributes:
             protocol: http
             public: 'true'
             discoverable: 'true'
             path: /q/dev
           name: quarkus-devui
-          port: 8080
+          targetPort: 8080
       memoryLimit: 4Gi
       env:
         - value: /home/jboss/.m2
